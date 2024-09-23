@@ -1,7 +1,5 @@
 #!/bin/bash
 
-JSON_FILE="data/data.json"
-
 if [ ! -f "$JSON_FILE" ]; then
     echo "Creating sample JSON file: $JSON_FILE"
     mkdir -p data
