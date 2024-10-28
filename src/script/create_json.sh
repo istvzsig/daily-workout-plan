@@ -1,9 +1,12 @@
 #!/bin/bash
 
-if [ ! -f "$JSON_FILE" ]; then
-    echo "Creating sample JSON file: $JSON_FILE"
+create_json() {
+  local file=$1
+
+  if [ ! -f "$file" ]; then
+    echo "Creating sample JSON file: $file"
     mkdir -p data
-    cat <<EOL > $JSON_FILE
+    cat <<EOL >$file
 {
   "workout_plan": {
     "Monday": {
@@ -102,4 +105,6 @@ if [ ! -f "$JSON_FILE" ]; then
   }
 }
 EOL
-fi
+  fi
+
+}
