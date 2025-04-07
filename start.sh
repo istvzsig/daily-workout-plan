@@ -14,11 +14,18 @@ source ./src/script/cleanup.sh
 create_json $JSON_FILE
 create_php $PHP_FILE
 
-echo "Starting server on $SERVER_ADDRESS:$SERVER_PORT..."
-php -S $SERVER_ADDRESS:$SERVER_PORT -t $BACKEND_ROOT &
+echo "###############################"
+echo "Want to open in browser? [y/n]"
+echo "###############################"
+read open
 
-sleep 2
+if [ $open == "y" ]; then
+    echo "Starting server on $SERVER_ADDRESS:$SERVER_PORT..."
+    php -S $SERVER_ADDRESS:$SERVER_PORT -t $BACKEND_ROOT &
+    open "http://$SERVER_ADDRESS:$SERVER_PORT"
 
-# open "http://$SERVER_ADDRESS:$SERVER_PORT"
+fi
+
+echo "finished..."
 
 wait $!
