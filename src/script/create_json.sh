@@ -14,12 +14,12 @@ create_json() {
         {
           "exercise": "Push-ups",
           "sets": 3,
-          "reps": "8-15"
+          "reps": "16-30"
         },
         {
           "exercise": "Incline Push-ups",
           "sets": 3,
-          "reps": "8-15"
+          "reps": "16-30"
         }
       ]
     },
@@ -28,12 +28,12 @@ create_json() {
         {
           "exercise": "Squats",
           "sets": 3,
-          "reps": "10-15"
+          "reps": "20-30"
         },
         {
           "exercise": "Lunges",
           "sets": 3,
-          "reps": "10-12 per leg"
+          "reps": "20-24 per leg"
         }
       ]
     },
@@ -42,12 +42,12 @@ create_json() {
         {
           "exercise": "Plank",
           "sets": 3,
-          "duration": "30-60 seconds"
+          "duration": "1-2 minutes"
         },
         {
           "exercise": "Burpees",
           "sets": 3,
-          "reps": "5-10"
+          "reps": "10-20"
         }
       ]
     },
@@ -56,12 +56,12 @@ create_json() {
         {
           "exercise": "Jump Squats",
           "sets": 3,
-          "reps": "8-12"
+          "reps": "16-24"
         },
         {
           "exercise": "Push-ups",
           "sets": 3,
-          "reps": "8-15"
+          "reps": "16-30"
         }
       ]
     },
@@ -70,12 +70,12 @@ create_json() {
         {
           "exercise": "Diamond Push-ups",
           "sets": 3,
-          "reps": "5-10"
+          "reps": "10-20"
         },
         {
           "exercise": "Chair Dips",
           "sets": 3,
-          "reps": "8-15"
+          "reps": "16-30"
         }
       ]
     },
@@ -84,12 +84,12 @@ create_json() {
         {
           "exercise": "Bulgarian Split Squats",
           "sets": 3,
-          "reps": "8-10 per leg"
+          "reps": "16-20 per leg"
         },
         {
           "exercise": "Wall Sit",
           "sets": 3,
-          "duration": "30-60 seconds"
+          "duration": "1-2 minutes"
         }
       ]
     },
@@ -98,7 +98,7 @@ create_json() {
         {
           "exercise": "Light walking",
           "sets": 1,
-          "duration": "30 minutes"
+          "duration": "1 hour"
         }
       ]
     }
