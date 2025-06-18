@@ -14,7 +14,6 @@ function create_workout_plan_with_ai() {
       "temperature": 0.7
     }')
 
-  # Validate JSON and return
   if ! echo "$response" | jq empty 2>/dev/null; then
     echo "Error: Invalid JSON from OpenAI"
     return 1
@@ -24,7 +23,7 @@ function create_workout_plan_with_ai() {
 }
 
 function get_ai_available_models() {
-  curl https://api.openai.com/v1/models \
+  curl -s https://api.openai.com/v1/models \
     -H "Authorization: Bearer $OPENAI_API_KEY" | jq
 }
 
@@ -36,10 +35,46 @@ function fetch_workout_plan_from_rapid_api() {
     -H "x-rapidapi-key: $X_RAPID_API_KEY" \
     -d '{"goal":"Build muscle","fitness_level":"Intermediate","preferences":["Weight training","Cardio"],"health_conditions":["None"],"schedule":{"days_per_week":4,"session_duration":60},"plan_duration_weeks":4,"lang":"en"}')
 
-  # Check if the response is valid JSON
   if ! echo "$response" | jq . >/dev/null 2>&1; then
     echo "Error: Invalid JSON response"
-    exit 1
+    return 1
+  fi
+
+  echo "$response"
+}
+
+# Hugging Face Inference API (may or may not work depending on model availability)
+function generate_workout_plan_hf() {
+  local hf_api_token="$HUGGING_FACE_TOKEN"
+  local model="deepseek-ai/DeepSeek-R1-0528"
+  local prompt='Create a 4-week intermediate workout plan to build muscle, 4 days per week, 60-minute sessions, using weight training and cardio. Format the result as JSON.'
+
+  local response=$(curl -s -X POST "https://api-inference.huggingface.co/models/$model" \
+    -H "Authorization: Bearer $hf_api_token" \
+    -H "Content-Type: application/json" \
+    -d "{\"inputs\":\"$prompt\"}")
+
+  echo "$response"
+}
+
+function generate_workout_plan_vllm_local() {
+  local prompt='Create a 4-week intermediate workout plan to build muscle, 4 days per week, 60-minute sessions, using weight training and cardio. Format the result as structured JSON.'
+
+  local response=$(curl -s -X POST "http://localhost:8000/v1/chat/completions" \
+    -H "Content-Type: application/json" \
+    -d "$(jq -n --arg p "$prompt" '{
+      model: "deepseek-ai/DeepSeek-R1-0528",
+      messages: [
+        {
+          role: "user",
+          content: $p
+        }
+      ]
+    }')")
+
+  if ! echo "$response" | jq empty 2>/dev/null; then
+    echo "Error: Invalid JSON from vLLM local server"
+    return 1
   fi
 
   echo "$response"
