@@ -1,30 +1,28 @@
 #!/bin/bash
 
-SERVER_ADDRESS="localhost"
-SERVER_PORT="5555"
-BACKEND_ROOT="src/backend/"
-JSON_FILE="./data/workout_plan.json"
-PHP_FILE="src/backend/index.php"
+set -euo pipefail
 
-source ./src/script/check_php.sh
-source ./src/script/create_json.sh
-source ./src/script/create_php.sh
-source ./src/script/cleanup.sh
+source .env
+source ./config.sh
+source ./src/script/*.sh
 
-create_json $JSON_FILE
-create_php $PHP_FILE
+fetch_workout_plan | jq >$JSON_FILE
+exit
 
-echo "###############################"
-echo "Want to open in browser? [y/n]"
-echo "###############################"
-read open
+# get_workout_plans $JSON_FILE
+# create_php $PHP_FILE
 
-if [ $open == "y" ]; then
-    echo "Starting server on $SERVER_ADDRESS:$SERVER_PORT..."
-    php -S $SERVER_ADDRESS:$SERVER_PORT -t $BACKEND_ROOT &
-    open "http://$SERVER_ADDRESS:$SERVER_PORT"
+# echo "###############################"
+# echo "Want to open in browser? [y/n]"
+# echo "###############################"
+# read open
 
-fi
+# if [ $open == "y" ]; then
+#     echo "Starting server on $SERVER_ADDRESS:$SERVER_PORT..."
+#     php -S $SERVER_ADDRESS:$SERVER_PORT -t $BACKEND_ROOT &
+#     open "http://$SERVER_ADDRESS:$SERVER_PORT"
+
+# fi
 
 echo "finished..."
 

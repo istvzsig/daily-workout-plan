@@ -1,6 +1,4 @@
-#!/bin/bash
-
-create_php() {
+function create_php() {
   local file=$1
   if [ ! -f "$file" ]; then
     echo "Creating file: $file"

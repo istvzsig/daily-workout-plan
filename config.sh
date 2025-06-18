@@ -1,0 +1,5 @@
+SERVER_ADDRESS="localhost"
+SERVER_PORT="5555"
+BACKEND_ROOT="src/backend/"
+PHP_FILE="src/backend/index.php"
+JSON_FILE="./data/workout-plan.json"

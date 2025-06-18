@@ -1,11 +1,7 @@
-#!/bin/bash
-
-# Cleanup function to stop the server
-cleanup() {
+function stop_server() {
     echo "Stopping servers..."
     pkill -f "php -S $SERVER_ADDRESS:$SERVER_PORT"
 
-    # Check if the pkill command was successful
     if [ $? -eq 0 ]; then
         echo "Servers stopped successfully."
     else
